@@ -1,12 +1,13 @@
 const express = require('express')
 
 const userService = require('../services/userPostsService')
-
 const router = express.Router()
-// const upload = multer({ dest: 'public/images' }); // Set up multer
+const fs = require('fs')
 
+// const upload = multer({ dest: 'public/images' }); // Set up multer
 //Récupérer et enregistrer les posts dans data.json
-router.post('/api/posts', async (req, res) => {
+
+router.post('/', async (req, res) => {
     try {
         const response = await userService.getPosts();
         const posts = response.data.slice(0, 10);
@@ -21,7 +22,7 @@ router.post('/api/posts', async (req, res) => {
 
 
 //Récupérer les posts depuis data.json
-router.get('/api/posts', (req, res) => {
+router.get('/file', (req, res) => {
     fs.readFile('data.json', 'utf8', (err, data) => {
         if (err) return res.status(500).send('Err');
         res.json(JSON.parse(data));
@@ -30,7 +31,7 @@ router.get('/api/posts', (req, res) => {
 
 
 //Récupérer un post spécifique depuis data.json
-  router.get('/api/posts/:postId', (req, res) => {
+  router.get('/:postId', (req, res) => {
     const postId = req.params.postId;
     fs.readFile('data.json', 'utf8', (err, data) => {
       if (err) return res.status(500).send('Err');

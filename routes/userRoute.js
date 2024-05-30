@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 })
 
 //Récupérer un utilisateur et ses posts
-router.get('/', async (req, res) => {
+router.get('/:id/posts', async (req, res) => {
     try {
       const userId = await req.params.id;
       console.log(userId);
