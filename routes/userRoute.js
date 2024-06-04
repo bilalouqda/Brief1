@@ -17,11 +17,11 @@ router.get('/', async (req, res) => {
 //Récupérer un utilisateur et ses posts
 router.get('/:id/posts', async (req, res) => {
     try {
-      const userId = await req.params.id;
+      const userId = req.params.id;
       console.log(userId);
       const userResponse = await userService.getUserId(userId);
       const postsResponse = await userService.getPosts();
-      const userPosts = await postsResponse.data.filter(post => post.userId == userId);
+      const userPosts = postsResponse.data.filter(post => post.userId == userId);
       console.log(userPosts);
       res.json({ user: userResponse.data, posts: userPosts });
     } catch (error) {
