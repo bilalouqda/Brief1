@@ -1,5 +1,4 @@
 const express = require('express')
-
 const userService = require('../services/userPostsService')
 const router = express.Router()
 const fs = require('fs');
@@ -21,7 +20,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-
 //Récupérer les posts depuis data.json
 router.get('/allposts', (req, res) => {
   fs.readFile('data.json', 'utf8', (err, data) => {
@@ -41,11 +39,6 @@ router.get('/:postId', (req, res) => {
     if (!post) return res.status(404).send('err post non trouvé');
     res.json(post);
   });
-});
-
-//Créer un fichier dans le dossier public/images
-router.post('/files', upload.single('file'), (req, res) => {
-  res.send('succès');
 });
 
 module.exports = router

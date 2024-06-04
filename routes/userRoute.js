@@ -21,7 +21,7 @@ router.get('/:id/posts', async (req, res) => {
       console.log(userId);
       const userResponse = await userService.getUserId(userId);
       const postsResponse = await userService.getPosts();
-      const userPosts = await postsResponse.data.filter(post => post.userId === userId);
+      const userPosts = await postsResponse.data.filter(post => post.userId == userId);
       console.log(userPosts);
       res.json({ user: userResponse.data, posts: userPosts });
     } catch (error) {
